@@ -3,6 +3,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const distFolder = path.resolve(__dirname, 'dist');
 const isProd = process.env.NODE_ENV === 'production';
@@ -17,7 +18,7 @@ module.exports = {
           drop_console: isProd
         }
       }
-    })],
+    }), new CssMinimizerPlugin()],
   },
   plugins: [
     new CopyPlugin({

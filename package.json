@@ -12,6 +12,7 @@
   "type": "module",
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
+    "css-minimizer-webpack-plugin": "^3.0.2",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
     "zip-webpack-plugin": "^4.0.1"
