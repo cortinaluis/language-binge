@@ -13,9 +13,9 @@ const fetchTranslation = async (word, source = 'en', target = 'pt') => {
             target,
         }),
     });
-    const json = await response.json();
-    console.log(json);
-    return json.translatedText;
+    const { translatedText } = await response.json();
+    window.languageBingeCache[word] = translatedText;    
+    return translatedText;
 };
 
 const handleMutation = (mutation) => {

@@ -14,7 +14,7 @@ const subtitlesObserver = new MutationObserver((mutationList) => {
 });
 
 (async () => {
-    window.translantionCache = {};
+    window.languageBingeCache = {};
     // sets up pageOverlay
     pageOverlay = translationOverlayController.getPageOverlayElement();
     document.getElementsByTagName('body')[0].appendChild(pageOverlay);

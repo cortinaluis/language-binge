@@ -15,11 +15,10 @@ export default class TranslationOverlayController {
 
         span.appendChild(textNode);
         span.addEventListener('mouseover', async () => {
-            if (window.translantionCache[word]) {
-                textNode.innerText = window.translantionCache[word];
+            if (window.languageBingeCache[word]) {
+                textNode.innerText = window.languageBingeCache[word];
             } else {
                 const translation = await fetchTranslation(word);
-                window.translantionCache[word] = translation;
                 textNode.innerText = translation;
             }
         });
