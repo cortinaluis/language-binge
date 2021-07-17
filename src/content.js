@@ -19,7 +19,7 @@ const subtitlesObserver = new MutationObserver((mutationList) => {
   document.getElementsByTagName('body')[0].appendChild(pageOverlay);
 
   // waits for the subtitle to be loaded by the user for `SECONDS_TO_WAIT` seconds and sets up the subtitlesObserver
-  for (let i = 0; i < Constants.MILISECONDS_TO_WAIT; i++) {
+  for (let i = 0; i < 10; i++) {
     try {
       subtitlesObserver.observe(document.getElementsByClassName('player-timedtext')[0], { childList: true });
       return;
