@@ -1,6 +1,6 @@
 import TranslationOverlayController from './translation-overlay-controller.js';
 import { handleMutation, timer } from './helpers.js';
-import * as Constants from './constants.js';
+import Constants from './constants.js';
 
 let pageOverlay;
 // const sentenceIndex = {};

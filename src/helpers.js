@@ -1,5 +1,5 @@
 import TranslationOverlayController from './translation-overlay-controller.js';
-import * as Constants from './constants.js';
+import Constants from './constants.js';
 
 const fetchTranslation = async (word, source = 'en', target = 'pt') => {
     const response = await fetch('https://libretranslate.de/translate', {

@@ -1,4 +1,4 @@
-import * as Constants from './constants.js';
+import Constants from './constants.js';
 import { fetchTranslation } from './helpers.js';
 
 export default class TranslationOverlayController {
