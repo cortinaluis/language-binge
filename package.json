@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
+    "serve": "yarn webpack --watch --config webpack.common.cjs",
     "build": "rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip"
   },
   "type": "module",
