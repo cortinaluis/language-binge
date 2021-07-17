@@ -1,17 +1,17 @@
-import TranslationOverlayController from "./translation-overlay-controller.js";
-import * as Constants from "./constants.js";
+import TranslationOverlayController from './translation-overlay-controller.js';
+import * as Constants from './constants.js';
 
 const fetchTranslation = async (word, source = 'en', target = 'pt') => {
     const response = await fetch('https://libretranslate.de/translate', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             q: word,
             source,
-            target
-        })
+            target,
+        }),
     });
     const json = await response.json();
     console.log(json);
@@ -38,14 +38,14 @@ const handleMutation = (mutation) => {
         console.dir(sentenceSpanHtmlElement);
         sentenceSpanHtmlElement.innerHTML = Constants.EMPTY_STRING;
         sentenceSpanHtmlElement.style.zIndex = 999999;
-        const overlay = document.getElementsByClassName('pageOverlay')[0]
+        const overlay = document.getElementsByClassName('pageOverlay')[0];
         overlay.innerHTML = Constants.EMPTY_STRING;
         overlay.appendChild(new TranslationOverlayController().getSentenceElement(sentence));
     }
 };
 
 async function timer(time = 1000) {
-    return new Promise(resolve => setTimeout(() => resolve(), time));
+    return new Promise((resolve) => setTimeout(() => resolve(), time));
 }
 
 export { fetchTranslation, handleMutation, timer };

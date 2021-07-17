@@ -1,16 +1,16 @@
-import * as Constants from "./constants.js";
-import { fetchTranslation } from "./helpers.js";
+import * as Constants from './constants.js';
+import { fetchTranslation } from './helpers.js';
 
 export default class TranslationOverlayController {
-    getWordSpanElement = (word) => {
+    getWordSpanElement(word) {
         const span = Object.assign(document.createElement('span'), {
             innerText: word.trim(),
-            className: "langBingeSpan"
+            className: 'langBingeSpan',
         });
 
         const textNode = Object.assign(document.createElement('span'), {
             innerText: 'loading...',
-            className: "langBingeTooltipText"
+            className: 'langBingeTooltipText',
         });
 
         span.appendChild(textNode);
@@ -27,20 +27,19 @@ export default class TranslationOverlayController {
         return span;
     }
 
+    getSentenceElement(sentence) {
+        const div = Object.assign(document.createElement('div'), { className: 'langBingeSentence' });
 
-    getSentenceElement = (sentence) => {
-        const div = Object.assign(document.createElement('div'), { className: "langBingeSentence" });
-
-        sentence.split(Constants.WHITESPACE).forEach(word => {
-            div.appendChild(this.getWordSpanElement(word))
+        sentence.split(Constants.WHITESPACE).forEach((word) => {
+            div.appendChild(this.getWordSpanElement(word));
         });
 
         return div;
     }
 
-    getPageOverlayElement = () => {
+    getPageOverlayElement() {
         const pageOverlay = Object.assign(document.createElement('div'), {
-            className: "pageOverlay"
+            className: 'pageOverlay',
         });
 
         return pageOverlay;

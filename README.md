@@ -13,7 +13,7 @@ Todo:
 - Setup CI/CD
 - Setup publishing
 - Add tests
-- Add ESLint
+- ~~Add ESLint~~
 - Add support to full screen Netflix
 
 Future:
