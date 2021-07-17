@@ -1,0 +1,17 @@
+{
+  "name": "language-binge",
+  "version": "1.0.0",
+  "description": "Binge your favorite TV shows and learn a new language!",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "build": "rm -rf dist/ && webpack --config webpack.common.cjs"
+  },
+  "type": "module",
+  "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
