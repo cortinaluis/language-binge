@@ -4,10 +4,10 @@
   "description": "Binge your favorite TV shows and learn a new language!",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
   "scripts": {
     "serve": "yarn webpack --watch --config webpack.common.cjs",
-    "build": "rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip"
+    "build:prod": "SET NODE_ENV=production&& rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip",
+    "build": "SET NODE_ENV=test&& rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip"
   },
   "type": "module",
   "devDependencies": {

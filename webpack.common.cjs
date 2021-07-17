@@ -5,6 +5,7 @@ const ZipPlugin = require('zip-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
 const distFolder = path.resolve(__dirname, 'dist');
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   optimization: {
@@ -13,7 +14,7 @@ module.exports = {
       extractComments: true,
       terserOptions: {
         compress: {
-          drop_console: true
+          drop_console: isProd
         }
       }
     })],
