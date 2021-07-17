@@ -1,16 +1,8 @@
 import TranslationOverlayController from "./translation-overlay-controller.js";
 import { handleMutation, timer } from "./helpers.js";
 import * as Constants from "./constants.js";
-
 let pageOverlay;
 // const sentenceIndex = {};
-/* 
-const DEBUG_MODE = true;
-const debugLog = (...params) => {
-  if (DEBUG_MODE)
-    console.debug(...params);
-}
-*/
 
 const translationOverlayController = new TranslationOverlayController();
 

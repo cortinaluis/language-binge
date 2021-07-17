@@ -47,5 +47,4 @@ async function timer(time = 1000) {
     return new Promise(resolve => setTimeout(() => resolve(), time));
 }
 
-
 export { fetchTranslation, handleMutation, timer };
