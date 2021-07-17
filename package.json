@@ -6,12 +6,13 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "build": "rm -rf dist/ && webpack --config webpack.common.cjs"
+    "build": "rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip"
   },
   "type": "module",
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
     "webpack": "^5.45.1",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "zip-webpack-plugin": "^4.0.1"
   }
 }

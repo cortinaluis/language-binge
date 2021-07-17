@@ -1,5 +1,7 @@
 const path = require('path');
+
 const CopyPlugin = require('copy-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 
 const distFolder = path.resolve(__dirname, 'dist');
 
@@ -10,6 +12,9 @@ module.exports = {
         { from: 'src/language-binge.css', to: distFolder },
         { from: 'src/manifest.json', to: distFolder }
       ]
+    }),
+    new ZipPlugin({
+      filename: path.resolve(__dirname, 'dist.zip')
     })
   ],
   entry: { content: './src/content.js' },
