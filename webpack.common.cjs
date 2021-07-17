@@ -2,10 +2,22 @@ const path = require('path');
 
 const CopyPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 const distFolder = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      extractComments: true,
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      }
+    })],
+  },
   plugins: [
     new CopyPlugin({
       patterns: [
