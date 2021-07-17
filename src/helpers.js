@@ -1,4 +1,5 @@
 import TranslationOverlayController from "./translation-overlay-controller.js";
+import * as Constants from "./constants.js";
 
 const fetchTranslation = async (word, source = 'en', target = 'pt') => {
     const response = await fetch('https://libretranslate.de/translate', {
@@ -35,10 +36,10 @@ const handleMutation = (mutation) => {
         */
         console.log('Text: ', sentence);
         console.dir(sentenceSpanHtmlElement);
-        sentenceSpanHtmlElement.innerHTML = '';
+        sentenceSpanHtmlElement.innerHTML = Constants.EMPTY_STRING;
         sentenceSpanHtmlElement.style.zIndex = 999999;
         const overlay = document.getElementsByClassName('pageOverlay')[0]
-        overlay.innerHTML = '';
+        overlay.innerHTML = Constants.EMPTY_STRING;
         overlay.appendChild(new TranslationOverlayController().getSentenceElement(sentence));
     }
 };
