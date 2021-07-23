@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build:crx": "",
     "serve": "yarn webpack --watch --config webpack.common.cjs",
     "build:prod": "SET NODE_ENV=production&& rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip",
     "build": "SET NODE_ENV=test&& rm -rf dist/ && webpack --config webpack.common.cjs && cp dist/dist.zip . && rm dist/dist.zip"
