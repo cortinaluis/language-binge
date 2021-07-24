@@ -3,5 +3,11 @@
         "include": [
             "chrome"
         ]
+    },
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     }
 }

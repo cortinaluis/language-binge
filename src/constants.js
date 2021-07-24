@@ -1,5 +1,0 @@
-const WHITESPACE = ' ';
-const EMPTY_STRING = '';
-const MILISECONDS_TO_WAIT = 1000;
-
-export default { WHITESPACE, MILISECONDS_TO_WAIT, EMPTY_STRING };

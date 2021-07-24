@@ -1,7 +1,7 @@
 {
   "name": "language-binge",
-  "version": "1.0.0",
-  "description": "Binge your favorite TV shows and learn a new language!",
+  "version": "2.0.0",
+  "description": "Binge-watch your favorite TV shows and learn a new language!",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -14,6 +14,7 @@
     "copy-webpack-plugin": "^9.0.1",
     "css-minimizer-webpack-plugin": "^3.0.2",
     "eslint": "^7.30.0",
+    "html-webpack-plugin": "^5.3.2",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
     "zip-webpack-plugin": "^4.0.1"
