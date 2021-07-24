@@ -4,10 +4,6 @@ import { fetchTranslation } from './helpers.js';
 
 
 export default class ElementFactory {
-    toggleVideoState() {
-        const video = document.getElementsByTagName('video')[0];
-        return video.paused ? video.play() : video.pause();
-    }
 
     getWordSpanElement(word) {
         const span = document.createElement('span');
@@ -20,7 +16,7 @@ export default class ElementFactory {
 
         span.appendChild(textNode);
         span.addEventListener('mouseover', async () => {
-            this.toggleVideoState();
+            document.getElementsByTagName('video')[0].pause();
             const lowercaseWord = word.toLowerCase();
 
             if (isWordTranslationInCache(lowercaseWord)) {
@@ -32,7 +28,7 @@ export default class ElementFactory {
             }
         });
 
-        span.addEventListener('mouseleave', () => this.toggleVideoState());
+        span.addEventListener('mouseleave', () => document.getElementsByTagName('video')[0].play());
         return span;
     }
 

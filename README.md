@@ -14,7 +14,6 @@ Known bugs:
 
 ~~- Deal with subtitle deactivation on streaming service (`observer.disconnect()` ?)~~
 
-
 Todos:
 
 ~~- Create small interface and icon~~
