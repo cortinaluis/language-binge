@@ -20,12 +20,13 @@ export default class NetflixMutationObserver {
                 return '';
             }, '');
 
+            Array.from(document.querySelector('.player-timedtext').children).forEach(child => child.remove());
+
             if (isSentenceInCache(completeSentence)) {
                 return;
             }
 
             overlay.innerHTML = EMPTY_STRING;
-            Array.from(document.querySelector('.player-timedtext').children).forEach(child => child.remove());
             logger.log('Text: ', completeSentence);
 
             setSentenceAsCached(completeSentence);
