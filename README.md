@@ -4,25 +4,12 @@ Download the extension on the [chrome web store](https://chrome.google.com/webst
 
 Known bugs:
 
-~~- The `MutationObserver` gets more data than it should, that retriggers unnecessary redraws at the `Overlay`~~
-
-~~- Translation is being called more than once. We should restrict those calls~~
-
-~~- Sometimes a standard subtitle from streaming service slips in~~
-
-~~- Kill subtitles from `Overlay` when they are removed from streaming subtitle~~
-
-~~- Deal with subtitle deactivation on streaming service (`observer.disconnect()` ?)~~
+`background.js` triggers cleanup even if the page doesn't have the overlay
 
 Todos:
 
-~~- Create small interface and icon~~
-
-~~- Add support for language selection (and extension persistent configs)~~
-
-~~Add ESLint~~
-
-- Add icon animation for loading ~~(replacing the error message of `MutationObserver`)~~
+- Add icon animation while it is detecting subtitle on page (move on from log warns/errors)
+- Remove subtitle from overlay when it is removed from original subtitle container on Netflix
 - Setup CI/CD
 - Setup publishing
 - Add tests
