@@ -1,7 +1,5 @@
-import { getWordTranslationInCache, isSentenceInCache, isWordTranslationInCache, setSentenceAsCached, setWordTranslationInCache } from './cache.js';
-import { EMPTY_STRING } from './constants.js';
-import ElementFactory from './element-factory.js';
-import logger from './logger.js';
+import { getWordTranslationInCache, isWordTranslationInCache, setWordTranslationInCache } from './cache.js';
+import { STREAMING_REGEXES } from './constants.js';
 
 const fetchTranslation = async (word, source = 'en', target = 'pt') => {
     if (isWordTranslationInCache(word)) {
@@ -25,34 +23,6 @@ const fetchTranslation = async (word, source = 'en', target = 'pt') => {
 
     return translatedText;
 };
-
-const handleMutation = (mutationList) => {
-    const overlay = document.getElementById('pageOverlay');
-
-    const completeSentence = mutationList.reduce((sum, mutation) => {
-        if (mutation.type === 'childList' && mutation.addedNodes.length) {
-            return sum + '\n' + Array.from(mutation.addedNodes).reduce((sum, curr) => {
-                const { innerText } = curr;
-                curr.children[0].innerHTML = EMPTY_STRING;
-                return sum + innerText;
-            }, '');
-        }
-        return '';
-    }, '');
-
-    if (isSentenceInCache(completeSentence)) {
-        return;
-    }
-
-    overlay.innerHTML = EMPTY_STRING;
-    Array.from(document.querySelector('.player-timedtext').children).forEach(child => child.remove());
-    logger.log('Text: ', completeSentence);
-
-    setSentenceAsCached(completeSentence);
-    overlay.appendChild(new ElementFactory().getSentenceElement(completeSentence));
-
-};
-
 
 // currently unused -- it's not like the libretranslate.de API is going to change every day
 const fetchSupportedLanguages = async () => {
@@ -93,16 +63,28 @@ const sendMessageToContent = (message, payload) => {
     });
 };
 
+const urlMatchesSupportedStreamingServices = (url) => {
+    if (!url) return null;
+
+    for (let [key, value] of Object.entries(STREAMING_REGEXES)) {
+        if (url.match(value)) {
+            return key;
+        }
+    }
+
+    return null;
+};
+
 async function timer(time = 1000) {
     return new Promise((resolve) => setTimeout(() => resolve(), time));
 }
 
 export {
     fetchTranslation,
-    handleMutation,
     fetchSupportedLanguages,
     timer,
     getObjectFromLocalStorage,
     saveObjectInLocalStorage,
     sendMessageToContent,
+    urlMatchesSupportedStreamingServices,
 };
