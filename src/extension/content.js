@@ -1,12 +1,12 @@
-import ElementFactory from '@/misc/element-factory.js';
+import ElementFactory from '@/misc/element-factory';
 import {
   getObjectFromLocalStorage,
   saveObjectInLocalStorage,
   timer,
-} from '@/misc/helpers.js';
-import { MILISECONDS_TO_WAIT, MESSAGES } from '@/misc/constants.js';
-import logger from '@/misc/logger.js';
-import MutationObserverStrategy from '@/misc/mutation-observer-strategy.js';
+} from '@/misc/helpers';
+import { MILISECONDS_TO_WAIT, MESSAGES } from '@/misc/constants';
+import logger from '@/misc/logger';
+import MutationObserverStrategy from '@/misc/mutation-observer-strategy';
 
 const setupGlobalWindowConfiguration = async () => {
   const fromLanguage = await getObjectFromLocalStorage('fromLanguage');

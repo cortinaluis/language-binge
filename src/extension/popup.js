@@ -2,9 +2,9 @@ import {
   getObjectFromLocalStorage,
   sendMessageToContent,
   fetchTranslation,
-} from '@/misc/helpers.js';
-import { MESSAGES, SUPPORTED_LANGUAGES } from '@/misc/constants.js';
-import ElementFactory from '@/misc/element-factory.js';
+} from '@/misc/helpers';
+import { MESSAGES, SUPPORTED_LANGUAGES } from '@/misc/constants';
+import ElementFactory from '@/misc/element-factory';
 import logger from '@/misc/logger';
 
 document.addEventListener('DOMContentLoaded', async () => {

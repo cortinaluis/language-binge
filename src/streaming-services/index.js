@@ -1,3 +1,3 @@
-import Netflix from './netflix/index.js';
+import Netflix from './netflix/index';
 
 export { Netflix };

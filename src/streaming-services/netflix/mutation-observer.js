@@ -1,7 +1,7 @@
-import { isSentenceInCache, setSentenceAsCached } from '@/misc/cache.js';
-import { EMPTY_STRING } from '@/misc/constants.js';
-import ElementFactory from '@/misc/element-factory.js';
-import logger from '@/misc/logger.js';
+import { isSentenceInCache, setSentenceAsCached } from '@/misc/cache';
+import { EMPTY_STRING } from '@/misc/constants';
+import ElementFactory from '@/misc/element-factory';
+import logger from '@/misc/logger';
 
 export default class NetflixMutationObserver {
   constructor() {

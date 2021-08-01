@@ -1,4 +1,4 @@
-import MutationObserver from './mutation-observer.js';
+import MutationObserver from './mutation-observer';
 
 export default {
   MutationObserver,

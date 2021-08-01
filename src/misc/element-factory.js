@@ -1,9 +1,6 @@
-import {
-  getWordTranslationInCache,
-  isWordTranslationInCache,
-} from './cache.js';
-import { WHITESPACE } from './constants.js';
-import { fetchTranslation } from './helpers.js';
+import { getWordTranslationInCache, isWordTranslationInCache } from './cache';
+import { WHITESPACE } from './constants';
+import { fetchTranslation } from './helpers';
 
 export default class ElementFactory {
   // todo: add video param as reference or create new strategy?

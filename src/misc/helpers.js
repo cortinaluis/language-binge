@@ -2,8 +2,8 @@ import {
   getWordTranslationInCache,
   isWordTranslationInCache,
   setWordTranslationInCache,
-} from './cache.js';
-import { STREAMING_REGEXES } from './constants.js';
+} from './cache';
+import { STREAMING_REGEXES } from './constants';
 
 const fetchTranslation = async (word, source = 'en', target = 'pt') => {
   if (isWordTranslationInCache(word)) {

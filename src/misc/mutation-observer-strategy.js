@@ -1,5 +1,5 @@
-import { MUTATION_OBSERVER_MAPPING } from './constants.js';
-import logger from './logger.js';
+import { MUTATION_OBSERVER_MAPPING } from './constants';
+import logger from './logger';
 
 export default class MutationObserverStrategy {
   constructor(streamingService) {
