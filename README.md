@@ -10,6 +10,7 @@ Todos:
 
 - Add icon animation while it is detecting subtitle on page (move on from log warns/errors)
 - Remove subtitle from overlay when it is removed from original subtitle container on Netflix
+- Add user subtitle style from netflix to overlay
 - Setup CI/CD
 - Setup publishing
 - Add tests
