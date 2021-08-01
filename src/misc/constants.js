@@ -1,3 +1,5 @@
+import { Netflix } from '@/streaming-services';
+
 const WHITESPACE = ' ';
 const EMPTY_STRING = '';
 const MILISECONDS_TO_WAIT = 1000;
@@ -11,6 +13,14 @@ const MESSAGES = {
 
 const STREAMING_REGEXES = {
     NETFLIX: /(https|http):\/\/(www.)?netflix.com\/watch\/*/,
+};
+
+const SUPPORTED_SERVICES = {
+    NETFLIX: 'NETFLIX',
+};
+
+const MUTATION_OBSERVER_MAPPING = {
+    NETFLIX: Netflix.MutationObserver,
 };
 
 const SUPPORTED_LANGUAGES = [
@@ -33,4 +43,4 @@ const SUPPORTED_LANGUAGES = [
     { 'code':'vi', 'name':'Vietnamese' },
 ];
 
-export { WHITESPACE, MILISECONDS_TO_WAIT, EMPTY_STRING, MESSAGES, SUPPORTED_LANGUAGES, STREAMING_REGEXES };
+export { WHITESPACE, MUTATION_OBSERVER_MAPPING, SUPPORTED_SERVICES, MILISECONDS_TO_WAIT, EMPTY_STRING, MESSAGES, SUPPORTED_LANGUAGES, STREAMING_REGEXES };
