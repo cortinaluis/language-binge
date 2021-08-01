@@ -15,6 +15,7 @@ const setupGlobalWindowConfiguration = async () => {
         wordTranslationCache: {},
         fromLanguage,
         toLanguage,
+        isDebugActivated: false,
     };
 
     chrome.runtime.onMessage.addListener(({ message, payload }) => {
