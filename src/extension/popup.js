@@ -6,9 +6,7 @@ import logger from '@/misc/logger';
 document.addEventListener('DOMContentLoaded', async () => {
     const browserLanguage = window.navigator.languages[1];
 
-    const elementFactory = new ElementFactory();
-
-    const languageOptionElements = elementFactory.getOptionElementsForLanguagesAsString(SUPPORTED_LANGUAGES);
+    const languageOptionElements = ElementFactory.getOptionElementsForLanguagesAsString(SUPPORTED_LANGUAGES);
 
     const fromLanguageElement = document.querySelector('#fromLanguage');
     const toLanguageElement = document.querySelector('#toLanguage');

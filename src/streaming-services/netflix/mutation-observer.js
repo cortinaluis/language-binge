@@ -30,7 +30,7 @@ export default class NetflixMutationObserver {
             logger.log('Text: ', completeSentence);
 
             setSentenceAsCached(completeSentence);
-            overlay.appendChild(new ElementFactory().getSentenceElement(completeSentence));
+            overlay.appendChild(ElementFactory.getSentenceElement(completeSentence));
         });
     }
 

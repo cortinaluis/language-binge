@@ -2,10 +2,9 @@ import { getWordTranslationInCache, isWordTranslationInCache } from './cache.js'
 import { WHITESPACE } from './constants.js';
 import { fetchTranslation } from './helpers.js';
 
-
 export default class ElementFactory {
-
-    getWordSpanElement(word) {
+    // todo: add video param as reference or create new strategy?
+    static getWordSpanElement(word) {
         const span = document.createElement('span');
         span.innerText = word.trim();
         span.className = 'langBingeSpan';
@@ -32,26 +31,26 @@ export default class ElementFactory {
         return span;
     }
 
-    getSentenceElement(sentence, hash) {
+    static getSentenceElement(sentence, hash) {
         const div = document.createElement('div');
         div.className = 'langBingeSentence';
         div.id = hash;
 
         sentence.split(WHITESPACE).forEach((word) => {
-            div.appendChild(this.getWordSpanElement(word));
+            div.appendChild(ElementFactory.getWordSpanElement(word));
         });
 
         return div;
     }
 
-    getPageOverlayElement() {
+    static getPageOverlayElement() {
         const pageOverlay = document.createElement('div');
         pageOverlay.className = 'pageOverlay';
         pageOverlay.id = 'pageOverlay';
         return pageOverlay;
     }
 
-    getOptionElementsForLanguagesAsString(languages) {
+    static getOptionElementsForLanguagesAsString(languages) {
         return languages.reduce((result, { code: languageAbbreviation, name }) => {
             const languageOption = document.createElement('option');
             languageOption.value = languageAbbreviation;

@@ -4,8 +4,6 @@ import { MILISECONDS_TO_WAIT, MESSAGES } from '@/misc/constants.js';
 import logger from '@/misc/logger.js';
 import MutationObserverStrategy from '@/misc/mutation-observer-strategy.js';
 
-const elementFactory = new ElementFactory();
-
 const setupGlobalWindowConfiguration = async () => {
     const fromLanguage = await getObjectFromLocalStorage('fromLanguage');
     const toLanguage = await getObjectFromLocalStorage('toLanguage');
@@ -41,7 +39,7 @@ const setupGlobalWindowConfiguration = async () => {
     });
 };
 
-const setupPageOverlay = () => document.getElementsByTagName('body')[0].appendChild(elementFactory.getPageOverlayElement());
+const setupPageOverlay = () => document.getElementsByTagName('body')[0].appendChild(ElementFactory.getPageOverlayElement());
 
 const cleanupPageOverlay = () => document.getElementById('pageOverlay').remove();
 
