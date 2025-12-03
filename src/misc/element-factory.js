@@ -1,6 +1,6 @@
 import { getWordTranslationInCache, isWordTranslationInCache } from './cache';
-import { WHITESPACE } from './constants';
-import { fetchTranslation } from './helpers';
+import { SUPPORTED_LANGUAGES, WHITESPACE } from './constants';
+import { fetchTranslation, getObjectFromSyncStorage } from './helpers';
 
 export default class ElementFactory {
   // todo: add video param as reference or create new strategy?
@@ -9,26 +9,26 @@ export default class ElementFactory {
     span.innerText = word.trim();
     span.className = 'langBingeSpan';
 
-    const textNode = document.createElement('span');
-    textNode.innerText = 'loading...'; // todo: repl ace this with an animation
-    textNode.className = 'langBingeTooltipText';
-
-    span.appendChild(textNode);
     span.addEventListener('mouseover', async () => {
+      const textNode = document.createElement('span');
+      textNode.className = 'langBingeTooltipText spinner';
+      span.appendChild(textNode);
       document.getElementsByTagName('video')[0].pause();
       const lowercaseWord = word.toLowerCase();
 
       if (isWordTranslationInCache(lowercaseWord)) {
         textNode.innerText = getWordTranslationInCache(lowercaseWord);
       } else {
-        const { fromLanguage, toLanguage } = window.languageBingeExtension;
-        const translation = await fetchTranslation(
+        const fromLanguage = await getObjectFromSyncStorage('fromLanguage');
+        const toLanguage = await getObjectFromSyncStorage('toLanguage');
+
+        textNode.innerText = await fetchTranslation(
           lowercaseWord,
           fromLanguage,
           toLanguage
         );
-        textNode.innerText = translation;
       }
+      textNode.className = 'langBingeTooltipText';
     });
 
     span.addEventListener('mouseleave', () =>
@@ -56,12 +56,18 @@ export default class ElementFactory {
     return pageOverlay;
   }
 
-  static getOptionElementsForLanguagesAsString(languages) {
-    return languages.reduce((result, { code: languageAbbreviation, name }) => {
+  static getOptionElementsForLanguages(selectedLanguage) {
+    const optionElements = [];
+    for (const { code: languageAbbreviation, name } of SUPPORTED_LANGUAGES) {
       const languageOption = document.createElement('option');
       languageOption.value = languageAbbreviation;
       languageOption.text = name;
-      return result + languageOption.outerHTML;
-    }, '');
+      if (languageAbbreviation === selectedLanguage) {
+        languageAbbreviation.selected = true;
+      }
+      optionElements.push(languageOption);
+    }
+
+    return optionElements;
   }
 }

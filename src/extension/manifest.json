@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Language Binge",
     "description": "Binge-watch your favorite TV shows and learn a new language!",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "icons": { 
         "16": "logo-16.png",
         "48": "logo-48.png",

@@ -1,56 +1,39 @@
 import {
-  getObjectFromLocalStorage,
-  sendMessageToContent,
+  getObjectFromSyncStorage,
   fetchTranslation,
+  saveObjectToSyncStorage,
 } from '@/misc/helpers';
-import { MESSAGES, SUPPORTED_LANGUAGES } from '@/misc/constants';
 import ElementFactory from '@/misc/element-factory';
 import logger from '@/misc/logger';
 
-document.addEventListener('DOMContentLoaded', async () => {
+(async () => {
   const browserLanguage = window.navigator.languages[1];
-
-  const languageOptionElements =
-    ElementFactory.getOptionElementsForLanguagesAsString(SUPPORTED_LANGUAGES);
 
   const fromLanguageElement = document.querySelector('#fromLanguage');
   const toLanguageElement = document.querySelector('#toLanguage');
 
-  fromLanguageElement.innerHTML = languageOptionElements;
-  toLanguageElement.innerHTML = languageOptionElements;
-
-  const defaultFromLanguage = await getObjectFromLocalStorage('fromLanguage');
-  const defaultToLanguage = await getObjectFromLocalStorage('toLanguage');
-
-  Array.from(fromLanguageElement.children).some((child) => {
-    if (child.value === defaultFromLanguage) {
-      child.selected = true;
-      return true;
-    }
-  });
-
-  Array.from(toLanguageElement.children).some((child) => {
-    if (child.value === defaultToLanguage) {
-      child.selected = true;
-      return true;
-    }
-  });
-
-  fromLanguageElement.addEventListener('change', async (event) => {
-    const targetLanguage = event.target.value;
-    sendMessageToContent(MESSAGES.SET_TO_LANGUAGE, targetLanguage);
-  });
-
-  toLanguageElement.addEventListener('change', async (event) => {
-    const targetLanguage = event.target.value;
-    sendMessageToContent(MESSAGES.SET_TO_LANGUAGE, targetLanguage);
-  });
+  const fromLanguage = await getObjectFromSyncStorage('fromLanguage');
+  const toLanguage = await getObjectFromSyncStorage('toLanguage');
+  for (const [languageElement, languageChoice] of [
+    [fromLanguageElement, { fromLanguage }],
+    [toLanguageElement, { toLanguage }],
+  ]) {
+    languageElement.append(
+      ...ElementFactory.getOptionElementsForLanguages(languageChoice)
+    );
+    languageElement.addEventListener('change', () =>
+      saveObjectToSyncStorage(
+        Object.keys(languageChoice)[0],
+        languageElement.value
+      )
+    );
+  }
 
   try {
     if (browserLanguage !== 'en') {
-      document.querySelector('label[for=fromLanguage]').innerHTML =
+      document.querySelector('label[for=fromLanguage]').textContent =
         await fetchTranslation('From:', 'en', browserLanguage);
-      document.querySelector('label[for=toLanguage]').innerHTML =
+      document.querySelector('label[for=toLanguage]').textContent =
         await fetchTranslation('To:', 'en', browserLanguage);
     }
   } catch (_) {
@@ -61,4 +44,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.main').style.visibility = 'visible';
     document.querySelector('.spinner').remove();
   }
-});
+})();

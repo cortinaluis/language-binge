@@ -5,12 +5,12 @@ import {
 } from './cache';
 import { STREAMING_REGEXES } from './constants';
 
-const fetchTranslation = async (word, source = 'en', target = 'pt') => {
+const fetchTranslation = async (word, source, target) => {
   if (isWordTranslationInCache(word)) {
     return getWordTranslationInCache(word);
   }
 
-  const response = await fetch('https://libretranslate.de/translate', {
+  const response = await fetch('http://localhost:5000/translate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -24,22 +24,22 @@ const fetchTranslation = async (word, source = 'en', target = 'pt') => {
 
   const { translatedText } = await response.json();
   setWordTranslationInCache(word, translatedText);
-
+  await timer(1000);
   return translatedText;
 };
 
 // currently unused -- it's not like the libretranslate.de API is going to change every day
 const fetchSupportedLanguages = async () => {
-  const response = await fetch('https://libretranslate.de/languages', {
+  const response = await fetch('http://localhost:5000/languages', {
     headers: { accept: 'application/json' },
   });
   return await response.json();
 };
 
-const getObjectFromLocalStorage = async (key) => {
+const getObjectFromSyncStorage = async (key) => {
   return new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.get(key, (value) => {
+      chrome.storage.sync.get(key, (value) => {
         resolve(value[key]);
       });
     } catch (ex) {
@@ -48,10 +48,10 @@ const getObjectFromLocalStorage = async (key) => {
   });
 };
 
-const saveObjectInLocalStorage = async (obj) => {
+const saveObjectToSyncStorage = async (key, value) => {
   return new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.set(obj, () => {
+      chrome.storage.sync.set({ [key]: value }, () => {
         resolve();
       });
     } catch (ex) {
@@ -86,8 +86,8 @@ export {
   fetchTranslation,
   fetchSupportedLanguages,
   timer,
-  getObjectFromLocalStorage,
-  saveObjectInLocalStorage,
+  getObjectFromSyncStorage,
+  saveObjectToSyncStorage,
   sendMessageToContent,
   urlMatchesSupportedStreamingServices,
 };

@@ -1,10 +1,6 @@
 {
-    "typeAcquisition": {
-        "include": [
-            "chrome"
-        ]
-    },
     "compilerOptions": {
+        "types": ["chrome"],
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]

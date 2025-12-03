@@ -1,57 +1,24 @@
 import ElementFactory from '@/misc/element-factory';
-import {
-  getObjectFromLocalStorage,
-  saveObjectInLocalStorage,
-  timer,
-} from '@/misc/helpers';
+import { timer } from '@/misc/helpers';
 import { MILISECONDS_TO_WAIT, MESSAGES } from '@/misc/constants';
 import logger from '@/misc/logger';
 import MutationObserverStrategy from '@/misc/mutation-observer-strategy';
 
-const setupGlobalWindowConfiguration = async () => {
-  const fromLanguage = await getObjectFromLocalStorage('fromLanguage');
-  const toLanguage = await getObjectFromLocalStorage('toLanguage');
-
+const setupGlobalWindowConfiguration = () => {
   window.languageBingeExtension = {
     sentenceCache: {},
     wordTranslationCache: {},
-    fromLanguage,
-    toLanguage,
-    isDebugActivated: false,
   };
-
-  chrome.runtime.onMessage.addListener(({ message, payload }) => {
-    switch (message) {
-      case MESSAGES.SET_FROM_LANGUAGE:
-        saveObjectInLocalStorage({
-          fromLanguage: payload,
-        });
-        window.languageBingeExtension.fromLanguage = payload;
-        break;
-
-      case MESSAGES.SET_TO_LANGUAGE:
-        saveObjectInLocalStorage({
-          toLanguage: payload,
-        });
-        window.languageBingeExtension.toLanguage = payload;
-        break;
-      default:
-        break;
-    }
-    return true;
-  });
 };
 
 const setupPageOverlay = () =>
-  document
-    .getElementsByTagName('body')[0]
-    .appendChild(ElementFactory.getPageOverlayElement());
+  document.body.appendChild(ElementFactory.getPageOverlayElement());
 
 const cleanupPageOverlay = () =>
   document.getElementById('pageOverlay').remove();
 
 const bootstrapExtension = async (streamingService) => {
-  await setupGlobalWindowConfiguration();
+  setupGlobalWindowConfiguration();
   setupPageOverlay();
 
   const mutationObserverStrategy = new MutationObserverStrategy(
@@ -77,10 +44,10 @@ const bootstrapExtension = async (streamingService) => {
   );
 };
 
-chrome.runtime.onMessage.addListener(({ message, streamingService }) => {
+chrome.runtime.onMessage.addListener(async ({ message, streamingService }) => {
   switch (message) {
     case MESSAGES.BOOTSTRAP_EXTENSION:
-      bootstrapExtension(streamingService);
+      await bootstrapExtension(streamingService);
       break;
     case MESSAGES.CLEANUP_PAGE_OVERLAY:
       cleanupPageOverlay();
